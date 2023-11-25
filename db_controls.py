@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 
 
@@ -27,7 +28,7 @@ def connect_table(db_name, table_name, columns_types_dict=None, unique=False):
     cur = db.cursor()
     columns_types_string = ""
     for column_name in columns_types_dict:
-        columns_types_string += column_name +" "+ columns_types_dict[column_name] + ",\n"
+        columns_types_string += column_name + " " + columns_types_dict[column_name] + ",\n"
 
     columns_types_string = columns_types_string[:-2]
 
@@ -60,7 +61,10 @@ def select(db_name, table_name, column_name, condition_column_name, condition_va
         cur.execute(f"""SELECT {column_name} FROM {table_name} WHERE {condition_column_name} = {condition_value}""")
         ret_value = cur.fetchone()
         db.close()
-        return ret_value[0]
+        if ret_value is not None:
+            return ret_value[0]
+        else:
+            return None
     except sqlite3.OperationalError:
         return None
 
@@ -101,6 +105,9 @@ def main():
     connect_table("BotDB", "chats", chat_attributes)
     insert("BotDB", "chats", insert_values)
 
+
+def main():
+    print(datetime.datetime.now().strftime("%D"))
 
 
 if __name__ == '__main__':
