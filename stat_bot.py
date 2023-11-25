@@ -12,7 +12,7 @@ from aiogram.types import Message
 from aiogram.utils.markdown import hbold
 
 # Bot token can be obtained via https://t.me/BotFather
-Key = open("key")
+Key = open("Token.txt")
 TOKEN = Key.readline()
 Key.close()
 
