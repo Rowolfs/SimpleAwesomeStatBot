@@ -17,14 +17,14 @@ def columns_names_values_to_string(columns_names, values):
     return columns_names_string, values_string
 
 
-def connect_table(db_name, table_name, columns_types_dict=None, unique=False):
+def connect_table(db_path, table_name, columns_types_dict=None, unique=False):
     """
-    :param db_name: string database name
+    :param db_path: string database name
     :param table_name: string table name
     :param columns_types_dict: dictionary {string column name : string column type }
     :return:
     """
-    db = sqlite3.connect(f"{db_name}.db")
+    db = sqlite3.connect(f"{db_path}.db")
     cur = db.cursor()
     columns_types_string = ""
     for column_name in columns_types_dict:
@@ -40,8 +40,8 @@ def connect_table(db_name, table_name, columns_types_dict=None, unique=False):
     db.close()
 
 
-def insert(db_name, table_name, columns_values_dict):
-    db = sqlite3.connect(f"{db_name}.db")
+def insert(db_path, table_name, columns_values_dict):
+    db = sqlite3.connect(f"{db_path}.db")
     cur = db.cursor()
     columns_names = columns_values_dict.keys()
     columns_values = columns_values_dict.values()
@@ -54,8 +54,8 @@ def insert(db_name, table_name, columns_values_dict):
     db.close()
 
 
-def select(db_name, table_name, column_name, condition_column_name, condition_value):
-    db = sqlite3.connect(f"{db_name}.db")
+def select(db_path, table_name, column_name, condition_column_name, condition_value):
+    db = sqlite3.connect(f"{db_path}.db")
     cur = db.cursor()
     try:
         cur.execute(f"""SELECT {column_name} FROM {table_name} WHERE {condition_column_name} = {condition_value}""")
@@ -69,8 +69,8 @@ def select(db_name, table_name, column_name, condition_column_name, condition_va
         return None
 
 
-def update(db_name, table_name, column_name, value, condition_column_name, condition_value):
-    db = sqlite3.connect(f"{db_name}.db")
+def update(db_path, table_name, column_name, value, condition_column_name, condition_value):
+    db = sqlite3.connect(f"{db_path}.db")
     cur = db.cursor()
     if isinstance(value, str):
         if isinstance(condition_value, str):
