@@ -37,7 +37,6 @@ async def start_handler(message: types.Message) -> None:
             "message_count": "INTEGER",
             "start_date_processing": "TEXT",
 
-
         }
         insert_values = {
             "chat_id": message.chat.id,
@@ -47,7 +46,8 @@ async def start_handler(message: types.Message) -> None:
         }
         db_controls.connect_table("data\BotDB", "chats", chat_attributes)
         db_controls.insert("data\BotDB", "chats", insert_values)
-        await message.answer("Начал считать")
+        await message.answer(
+            "Привет я бот сделанный Ромой пока я умею немного (считать сообщения) но он вложил меня много труда поютому я тут и да я начал считать")
 
 
 @dp.message(Command("count"))
