@@ -1,0 +1,11 @@
+meta:
+  environment: python
+  toolchain:
+    name: pip
+    version: 3.9
+build:
+  requirementsPath: ''
+run:
+  scriptName: stat_bot.py
+  persistenceMount: /data
+  containerPort: 80
